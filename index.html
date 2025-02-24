@@ -204,12 +204,9 @@
         </div>
     </div>
 
-    <script>
+<script>
         // 初始化数据
-        const users = {
-            "谢伊琳": { totalPoints: 0, totalDays: 0, totalTasks: 0, redeemedItems: [], logItems: [] },
-            "谢姝妤": { totalPoints: 0, totalDays: 0, totalTasks: 0, redeemedItems: [], logItems: [] }
-        };
+        let users = {};
         let currentUser = "谢伊琳";
 
         // 加载本地存储中的数据
@@ -219,6 +216,14 @@
                 const parsedData = JSON.parse(savedData);
                 users = parsedData.users;
                 currentUser = parsedData.currentUser || "谢伊琳";
+                console.log("已加载数据：", parsedData);
+            } else {
+                // 如果没有本地存储数据，使用默认值初始化
+                users = {
+                    "谢伊琳": { totalPoints: 0, totalDays: 0, totalTasks: 0, redeemedItems: [], logItems: [] },
+                    "谢姝妤": { totalPoints: 0, totalDays: 0, totalTasks: 0, redeemedItems: [], logItems: [] }
+                };
+                console.log("未找到本地存储数据，使用默认值初始化。");
             }
         }
 
@@ -229,8 +234,8 @@
                 currentUser: currentUser
             };
             localStorage.setItem("dreamPlanData", JSON.stringify(dataToSave));
+            console.log("已保存数据：", dataToSave);
         }
-
 
         // 更新统计数据
         function updateStats() {
