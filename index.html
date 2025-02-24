@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦想计划</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.postimg.cc/1z0GWZ7P/image.png'); /* 替换为您的背景图片链接 */
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1, h2 {
+            color: #ae7cf9;
+            text-shadow: 2px 2px 4px rgba(0, 10, 10, 0);
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 00px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 538px;
+        }
+        .avatars {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1px;
+        }
+        .avatar {
+            text-align: center;
+            cursor: pointer;
+        }
+        .avatar img {
+            width: 60px;
+            height: 60px;
+            border-radius:10%;
+           border: 3px solid #fefefe;
+            transition: transform 0.3s ease;
+        }
+        .avatar img:hover {
+            transform: scale(1.1);
+        }
+        .stats {
+            font-size: 18px;
+            color: #090909;
+         }
+        .disney-button {
+            background: transparent; /* 背景透明 */
+            border: 2px solid#ae7cf9; /* 描边颜色 */
+            color: #ae7cf9; /* 文字颜色与描边一致 */
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px; /* 增加上下间距 */
+            transition: all 0.3s ease; /* 平滑过渡效果 */
+        }
+        .disney-button:hover {
+            background: #8c40fe; /* 悬停时填充颜色 */
+            color: white; /* 悬停时文字颜色变为白色 */
+            transform: scale(1.05); /* 放大效果 */
+        }
+        .icon-outline {
+            color: #9857f9; /* 图标颜色 */
+            text-shadow: 
+                -1px -1px 0 #fff,  /* 上左描边 */
+                1px -1px 0 #fff,   /* 上右描边 */
+                -1px 1px 0 #fff,   /* 下左描边 */
+                1px 1px 0 #fff;    /* 下右描边 */
+        }
+        .log-item {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-star icon-outline"></i> 梦想计划</h1>
+        <p>梦想计划是针对谢伊琳和谢姝妤小朋友开发的梦想成就工具，帮助两个小朋友更加独立的思考学习，并且通过完成游戏关卡任务解锁梦想</p>
+
+        <!-- 小朋友头像选择 -->
+        <div class="avatars">
+            <div class="avatar" onclick="switchUser('谢伊琳')">
+                <img src="https://i.postimg.cc/15cT3CvK/31.png" alt="谢伊琳">
+                <span>谢伊琳</span>
+            </div>
+            <div class="avatar" onclick="switchUser('谢姝妤')">
+                <img src="https://i.postimg.cc/pVj4gX84/2.png" alt="谢姝妤">
+                <span>谢姝妤</span>
+            </div>
+        </div>
+
+        <!-- 统计数据 -->
+        <div class="section stats">
+            <p><strong>当前用户：</strong><span id="currentUser">谢伊琳</span></p>
+            <p><strong>累积积分：</strong><span id="totalPoints">0</span></p>
+            <p><strong>累计打卡天数：</strong><span id="totalDays">0</span></p>
+            <p><strong>累计打卡次数：</strong><span id="totalTasks">0</span></p>
+        </div>
+
+        <!-- 打卡任务 -->
+        <div class="section">
+            <h2><i class="fas fa-tasks"></i> 每日任务</h2>
+            <button class="disney-button" onclick="confirmTaskWithPassword('阅读 30 分钟', 5)">阅读 30 分钟 (+5 分)</button>
+            <button class="disney-button" onclick="confirmTaskWithPassword('英语打卡 15 分钟', 5)">英语打卡 15 分钟 (+5 分)</button>
+            <button class="disney-button" onclick="confirmTaskWithPassword('体育锻炼 30 分钟', 5)">体育锻炼 30 分钟 (+5 分)</button>
+            <button class="disney-button" onclick="confirmTaskWithPassword('乖巧完成作业', 2)">乖巧完成作业 (+2 分)</button>
+            <button class="disney-button" onclick="confirmTaskWithPassword('每天表现得分', 2)">每天表现得分 (+2 分)</button>
+            <button class="disney-button" onclick="confirmTaskWithPassword('21：30前睡觉', 2)">21：30前睡觉 (+2 分)</button>
+        </div>
+
+        <!-- 梦想事件 -->
+        <div class="section dreams">
+            <h2><i class="fas fa-gift"></i> 梦想事件</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-castle"></i> 去迪士尼玩 (1000 分)
+                    <button class="disney-button" onclick="confirmDream(1000, '去迪士尼玩')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-hot-tub"></i> 泡温泉 (500 分)
+                    <button class="disney-button" onclick="confirmDream(500, '泡温泉')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-dress"></i> 买好看的裙子 (200 分)
+                    <button class="disney-button" onclick="confirmDream(200, '买好看的裙子')">兑换</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 积分宝库 -->
+        <div class="section rewards">
+            <h2><i class="fas fa-coins"></i> 积分宝库</h2>
+            <ul>
+                <li>
+                    <i class="fas fa-tv"></i> 看电视 30 分钟 (-10 分)
+                    <button class="disney-button" onclick="confirmReward(10, '看电视 30 分钟')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-cookie-bite"></i> 购买零食 (1 元 = 1 分)
+                    <input type="number" id="snackCost" placeholder="输入金额" />
+                    <button class="disney-button" onclick="confirmSnack()">兑换</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 兑换记录 -->
+        <div class="section">
+            <h2><i class="fas fa-list"></i> 兑换记录</h2>
+            <ul id="redeemedItems"></ul>
+        </div>
+
+        <!-- 打卡记录 -->
+        <div class="section">
+            <h2><i class="fas fa-calendar-check"></i> 打卡记录</h2>
+            <ul id="logItems"></ul>
+        </div>
+    </div>
+
+    <script>
+        // 初始化数据
+        const users = {
+            "谢伊琳": { totalPoints: 0, totalDays: 0, totalTasks: 0, redeemedItems: [], logItems: [] },
+            "谢姝妤": { totalPoints: 0, totalDays: 0, totalTasks: 0, redeemedItems: [], logItems: [] }
+        };
+        let currentUser = "谢伊琳";
+
+        // 更新统计数据
+        function updateStats() {
+            document.getElementById('currentUser').textContent = currentUser;
+            document.getElementById('totalPoints').textContent = users[currentUser].totalPoints;
+            document.getElementById('totalDays').textContent = users[currentUser].totalDays;
+            document.getElementById('totalTasks').textContent = users[currentUser].totalTasks;
+
+            // 更新兑换记录
+            const redeemedList = document.getElementById('redeemedItems');
+            redeemedList.innerHTML = '';
+            users[currentUser].redeemedItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                redeemedList.appendChild(li);
+            });
+
+            // 更新打卡记录
+            const logList = document.getElementById('logItems');
+            logList.innerHTML = '';
+            users[currentUser].logItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                logList.appendChild(li);
+            });
+        }
+
+        // 切换用户
+        function switchUser(name) {
+            currentUser = name;
+            updateStats();
+        }
+
+        // 确认任务（带密码验证）
+        function confirmTaskWithPassword(taskName, points) {
+            const password = prompt("请输入密码以确认任务：");
+            if (password === "Wuqing1314") {
+                const today = new Date().toLocaleDateString();
+                const confirmed = confirm(`是否确认完成任务：${taskName}？`);
+                if (confirmed) {
+                    // 检查是否已经记录了今天的日期
+                    if (!users[currentUser].logItems.some(item => item.startsWith(today))) {
+                        users[currentUser].totalDays++; // 只有当天第一次打卡才增加天数
+                    }
+                    users[currentUser].totalPoints += points;
+                    users[currentUser].totalTasks++; // 增加累计打卡次数
+                    users[currentUser].logItems.push(`${today} - ${taskName}`);
+                    updateStats();
+                }
+            } else {
+                alert("密码错误，无法确认任务！");
+            }
+        }
+
+        // 确认梦想事件兑换
+        function confirmDream(cost, dreamName) {
+            const confirmed = confirm(`是否确认兑换梦想事件：${dreamName}（-${cost} 分）？`);
+            if (confirmed && users[currentUser].totalPoints >= cost) {
+                users[currentUser].totalPoints -= cost;
+                users[currentUser].redeemedItems.push(`梦想事件：${dreamName}`);
+                updateStats();
+            } else if (users[currentUser].totalPoints < cost) {
+                alert("积分不足，无法兑换！");
+            }
+        }
+
+        // 确认奖励兑换
+        function confirmReward(cost, rewardName) {
+            const confirmed = confirm(`是否确认兑换奖励：${rewardName}（-${cost} 分）？`);
+            if (confirmed && users[currentUser].totalPoints >= cost) {
+                users[currentUser].totalPoints -= cost;
+                users[currentUser].redeemedItems.push(`奖励：${rewardName}`);
+                updateStats();
+            } else if (users[currentUser].totalPoints < cost) {
+                alert("积分不足，无法兑换！");
+            }
+        }
+
+        // 确认零食兑换
+        function confirmSnack() {
+            const snackCost = parseInt(document.getElementById('snackCost').value);
+            if (isNaN(snackCost) || snackCost <= 0) {
+                alert("请输入有效的金额！");
+                return;
+            }
+            const confirmed = confirm(`是否确认购买零食（-${snackCost} 分）？`);
+            if (confirmed && users[currentUser].totalPoints >= snackCost) {
+                users[currentUser].totalPoints -= snackCost;
+                users[currentUser].redeemedItems.push(`购买零食：${snackCost} 分`);
+                updateStats();
+            } else if (users[currentUser].totalPoints < snackCost) {
+                alert("积分不足，无法兑换！");
+            }
+        }
+
+        // 初始化页面
+        updateStats();
+    </script>
+</body>
+</html>
