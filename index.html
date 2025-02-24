@@ -20,7 +20,7 @@
             justify-content: center;
             min-height: 100vh;
         }
-        h1, h2 {
+        h1, h2,h3 {
             color: #ae7cf9;
             text-shadow: 2px 2px 4px rgba(0, 10, 10, 0);
         }
@@ -94,7 +94,7 @@
         <!-- 小朋友头像选择 -->
         <div class="avatars">
             <div class="avatar" onclick="switchUser('谢伊琳')">
-                <img src="https://i.postimg.cc/15cT3CvK/31.png" alt="谢伊琳">
+                <img src="https://i.postimg.cc/d0wk21FC/2.png" alt="谢伊琳">
                 <span>谢伊琳</span>
             </div>
             <div class="avatar" onclick="switchUser('谢姝妤')">
@@ -120,19 +120,50 @@
             <button class="disney-button" onclick="confirmTaskWithPassword('乖巧完成作业', 2)">乖巧完成作业 (+2 分)</button>
             <button class="disney-button" onclick="confirmTaskWithPassword('每天表现得分', 2)">每天表现得分 (+2 分)</button>
             <button class="disney-button" onclick="confirmTaskWithPassword('21：30前睡觉', 2)">21：30前睡觉 (+2 分)</button>
+            <h3><i class="fas fa-tasks"></i> 成就任务</h3>
+            <button class="disney-button" onclick="confirmTaskWithPassword('青台好少年', 200)">青台好少年 (+200 分)</button>
         </div>
 
         <!-- 梦想事件 -->
         <div class="section dreams">
             <h2><i class="fas fa-gift"></i> 梦想事件</h2>
             <ul>
-                <li>
-                    <i class="fas fa-castle"></i> 去迪士尼玩 (1000 分)
-                    <button class="disney-button" onclick="confirmDream(1000, '去迪士尼玩')">兑换</button>
+                 <li>
+                    <i class="fas fa-castle"></i> 可爱小狗 (20000 分)
+                    <button class="disney-button" onclick="confirmDream(20000, ' 可爱小狗')">兑换</button>
                 </li>
                 <li>
-                    <i class="fas fa-hot-tub"></i> 泡温泉 (500 分)
-                    <button class="disney-button" onclick="confirmDream(500, '泡温泉')">兑换</button>
+                    <i class="fas fa-castle"></i> 巴厘岛旅游 (3000 分)
+                    <button class="disney-button" onclick="confirmDream(3000, ' 巴厘岛旅游')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-castle"></i> 小和尚鹦鹉 (2000 分)
+                    <button class="disney-button" onclick="confirmDream(2000, '小和尚鹦鹉')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-castle"></i> 迪士尼乐园 (1000 分)
+                    <button class="disney-button" onclick="confirmDream(1000, '迪士尼乐园')">兑换</button>
+                </li>
+                   <li>
+                    <i class="fas fa-castle"></i>小天才智能手表 (1000 分)
+                    <button class="disney-button" onclick="confirmDream(1000, '小天才智能手表 ')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-castle"></i>兔子警长套装 (500 分)
+                    <button class="disney-button" onclick="confirmDream(500, '兔子警长套装 ')">兑换</button>
+                </li>
+                <li>
+                    <i class="fas fa-castle"></i>小龙猫(500 分)
+                    <button class="disney-button" onclick="confirmDream(500, '小龙猫 ')">兑换</button>
+                </li>
+              <li>
+                    <i class="fas fa-castle"></i>精美化妆盒 (300 分)
+                    <button class="disney-button" onclick="confirmDream(300, '精美化妆盒 ')">兑换</button>
+                </li>
+
+                 <li>
+                    <i class="fas fa-castle"></i> 泡温泉 (250 分)
+                    <button class="disney-button" onclick="confirmDream(250, '泡温泉')">兑换</button>
                 </li>
                 <li>
                     <i class="fas fa-dress"></i> 买好看的裙子 (200 分)
